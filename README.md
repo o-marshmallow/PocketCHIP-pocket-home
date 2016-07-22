@@ -12,6 +12,7 @@ sudo apt-get install \
     libxft-dev \
     libxinerama-dev \
     libnm-glib-dev \
+    libnm-gtk-dev \
     network-manager-dev
 ```
 
