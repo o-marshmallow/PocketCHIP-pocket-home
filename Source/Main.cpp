@@ -249,11 +249,11 @@ PokeLaunchApplication::MainWindow::MainWindow(String name, const var &configJson
   setResizable(true, false);
   setContentOwned(new MainContentComponent(configJson), true);
   centreWithSize(getWidth(), getHeight());
+
+  // Try to show over the full screen. YMMV
+  setFullScreen(true);
+  Desktop::getInstance().setKioskModeComponent(getTopLevelComponent(), false);
   setVisible(true);
-#if JUCE_LINUX
-//  setTitleBarHeight(0);
-//  setFullScreen(true);
-#endif
 }
 
 void PokeLaunchApplication::MainWindow::activeWindowStatusChanged() {

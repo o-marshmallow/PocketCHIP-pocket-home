@@ -249,10 +249,13 @@ clock(nullptr), labelip("ip", "")
   
   // Apps page
   /* Check whether we have to display vertically the icons
-   * Checking "VERTICAL" lets horizontal direction be the default one
+   * Default based on window size, but allow override in config
    */
-  bool vertical = (configJson["direction"].toString()=="VERTICAL");
-    auto appsPage = new AppsPageComponent(this, !vertical);
+  auto b = getLocalBounds();
+  bool vertical =
+    (configJson["direction"].toString()=="" && b.getWidth() < b.getHeight()) ||
+    (configJson["direction"].toString()=="VERTICAL");
+  auto appsPage = new AppsPageComponent(this, !vertical);
   appsPage->setName("Apps");
   pages.add(appsPage);
   pagesByName.set("Apps", appsPage);
@@ -335,8 +338,7 @@ void LauncherComponent::resized() {
                         barSize);
   botButtons->setBounds(bounds.getX(), bounds.getHeight() - barSize, bounds.getWidth(),
                              barSize);
-  pageStack->setBounds(bounds.getX() + barSize, bounds.getY(), bounds.getWidth() - 2*barSize,
-                       bounds.getHeight());
+  pageStack->setBounds(bounds.getX(), bounds.getY(), bounds.getWidth(), bounds.getHeight());
   launchSpinner->setBounds(0, 0, bounds.getWidth(), bounds.getHeight());
   
   batteryLabel->setBounds(bounds.getX()+40, bounds.getY(), 50, 50);

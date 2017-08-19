@@ -112,7 +112,7 @@ LoginPage::~LoginPage(){}
 
 void LoginPage::resized() {
   auto bounds = getLocalBounds();
-  ntcIcon->setBounds(0, 0, 480, 130);
+  ntcIcon->setBounds(0, 0, bounds.getWidth(), bounds.getHeight() / 2);
   bgImage->setBounds(0, 0, bgImage->getWidth(), bgImage->getHeight());
 }
 
