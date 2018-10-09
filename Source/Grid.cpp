@@ -103,7 +103,7 @@ void GridPage::resized() {}
 Grid::Grid(int numCols, int numRows) :
   numCols(numCols),
   numRows(numRows),
-  selection(new DrawableImage()),
+  selection(new ImageComponent()),
   selectindex(0)
 {
   page = new GridPage(numCols, numRows);
@@ -118,7 +118,7 @@ Grid::Grid(int numCols, int numRows) :
 
   //Selection square
   Image image = createImageFromFile(assetFile("llselection.png"));
-  selection->setImage(image);
+  selection->setImage(image, RectanglePlacement::stretchToFit);
   selection->setName("Select");
 
   // mildly convoluted way of finding proportion of available height to give each row,
@@ -277,9 +277,9 @@ void Grid::resized() {
   page->setBounds(bounds);
   
   //Draw selection rectangle at first
-  int x = 12+(selectindex%numCols)*((int) colWidth);
-  int y = (selectindex/numCols)*(rowHeight+10);
-  selection->setBounds(bounds.getX()+x, bounds.getY()+y, 100, 100);
+  int x = 6+(selectindex%numCols)*((int) colWidth);
+  int y = (selectindex/numCols)*(rowHeight);
+  selection->setBounds(bounds.getX()+x, bounds.getY()+y, colWidth - 10, selectindex/numCols == 0 ? rowHeight : rowHeight + 20);
   
   // lay out components, size the rows first
   rowLayout.layOutComponents(rowComps, numRowComps, bounds.getX(), bounds.getY(),

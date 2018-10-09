@@ -82,7 +82,7 @@ enum Choices{
 
 class EditWindow: public Component, public Button::Listener{
 public:
-  EditWindow(AppIconButton*);
+  EditWindow(AppIconButton*, int w, int h);
   ~EditWindow();
   virtual void paint(Graphics &) override;
   virtual void resized() override;

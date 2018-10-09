@@ -136,10 +136,10 @@ void PowerPageComponent::resized() {
 
   mainPage->setBounds(bounds);
   
-  powerOffButton->setBounds(bounds.getWidth()/7, 40, 350, 40);
-  sleepButton->setBounds(bounds.getWidth()/7, 90, 350, 40);
-  rebootButton->setBounds(bounds.getWidth()/7, 140, 350, 40);
-  felButton->setBounds(bounds.getWidth()/7, 190, 350, 40);
+  powerOffButton->setBounds(bounds.getWidth()/7, 40, bounds.getWidth() - 130, 40);
+  sleepButton->setBounds(bounds.getWidth()/7, 90, bounds.getWidth() - 130, 40);
+  rebootButton->setBounds(bounds.getWidth()/7, 140, bounds.getWidth() - 130, 40);
+  felButton->setBounds(bounds.getWidth()/7, 190, bounds.getWidth() - 130, 40);
   backButton->setBounds(bounds.getWidth()-60, bounds.getY(), 60, bounds.getHeight());
   
   buildNameLabel->setBounds(bounds.getX(), bounds.getY(), bounds.getWidth(), 30);

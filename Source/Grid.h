@@ -59,7 +59,7 @@ private:
   double rowProp;
   double rowSpacerProp;
   double colProp;
-  ScopedPointer<DrawableImage> selection;
+  ScopedPointer<ImageComponent> selection;
   int selectindex;
   
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Grid)

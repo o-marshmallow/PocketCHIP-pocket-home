@@ -12,7 +12,8 @@ spl(new SettingsPageLogin),
 datetime(new DateTimePage(lc)),
 ppc(new PersonalizePageComponent(lc)),
 inputsettings(new InputSettingsPage(lc)),
-index(0)
+index(0),
+optPerPage(4)
 {
   //Title font
   title.setFont(Font(27.f));
@@ -67,7 +68,7 @@ void AdvancedSettingsPage::checkNav(){
     previousarrow->setVisible(false);
   }
   
-  if(index+OPTPERPAGE < allbuttons.size())
+  if(index+optPerPage < allbuttons.size())
     nextarrow->setVisible(true);
   else nextarrow->setVisible(false);
 }
@@ -75,26 +76,26 @@ void AdvancedSettingsPage::checkNav(){
 void AdvancedSettingsPage::resized(){
   auto bounds = getLocalBounds();
   int btn_height = 30;
-  int btn_width = 345;
   
   backButton->setBounds(bounds.getX(), bounds.getY(), 60, bounds.getHeight());
-  title.setBounds(bounds.getX()+150, bounds.getY()+10, btn_width, btn_height);
+  title.setBounds((bounds.getX()+(bounds.getWidth()/2))-50, bounds.getY()+10, bounds.getWidth(), btn_height);
   
   //Hide all the buttons
   for(int i = 0; i < allbuttons.size(); i++)
     allbuttons[i]->setVisible(false);
-  
+ 
+  optPerPage = (bounds.getHeight() - 100) / 50;
   //Display only the buttons of the current page
   int y = 50;
-  for(int i=index; i < allbuttons.size() && i < index+OPTPERPAGE; i++){
+  for(int i=index; i < allbuttons.size() && i < index+optPerPage; i++){
     allbuttons[i]->setVisible(true);
-    allbuttons[i]->setBounds(bounds.getX()+70, bounds.getY()+y, btn_width, btn_height);
+    allbuttons[i]->setBounds(bounds.getX()+70, bounds.getY()+y, bounds.getWidth() - 80, btn_height);
     y += 50;
   }
   
   int arrow_height = 50;
-  nextarrow->setBoundsToFit(0, 252-arrow_height/2, 480, arrow_height, Justification::centred, true);
-  previousarrow->setBoundsToFit(0, 0, 480, arrow_height, Justification::centred, true);
+  nextarrow->setBoundsToFit(0, bounds.getHeight()-arrow_height, bounds.getWidth(), arrow_height, Justification::centred, true);
+  previousarrow->setBoundsToFit(0, 0, bounds.getWidth(), arrow_height, Justification::centred, true);
   
   checkNav();
 }
@@ -127,11 +128,11 @@ void AdvancedSettingsPage::buttonClicked(Button* button){
   else if(button == &personalizeButton)
     getMainStack().pushPage(ppc, PageStackComponent::kTransitionTranslateHorizontal);
   else if(button == &(*nextarrow)){
-    index += OPTPERPAGE;
+    index += optPerPage;
     resized();
   }
   else if(button == &(*previousarrow)){
-    index -= OPTPERPAGE;
+    index -= optPerPage;
     resized();
   }
   else if(button == &inputoptions){

@@ -220,10 +220,13 @@ clock(nullptr), labelip("ip", "")
   
   // Apps page
   /* Check whether we have to display vertically the icons
-   * Checking "VERTICAL" lets horizontal direction be the default one
+   * Default based on window size, but allow override in config
    */
-  bool vertical = (configJson["direction"].toString()=="VERTICAL");
-    auto appsPage = new AppsPageComponent(this, !vertical);
+  auto b = getLocalBounds();
+  bool vertical =
+    (configJson["direction"].toString()=="" && b.getWidth() < b.getHeight()) ||
+    (configJson["direction"].toString()=="VERTICAL");
+  auto appsPage = new AppsPageComponent(this, !vertical);
   appsPage->setName("Apps");
   pages.add(appsPage);
   pagesByName.set("Apps", appsPage);

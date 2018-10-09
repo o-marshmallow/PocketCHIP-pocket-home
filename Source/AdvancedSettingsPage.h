@@ -24,7 +24,7 @@ public:
 
 private:
   JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AdvancedSettingsPage)
-  
+ 
   void checkNav();
   //Title of the pane
   Label title;
@@ -43,7 +43,8 @@ private:
   ScopedPointer<PersonalizePageComponent> ppc;
   ScopedPointer<DateTimePage> datetime;
   ScopedPointer<InputSettingsPage> inputsettings;
-  
+  int optPerPage;
+
   //Next and previous buttons
   ScopedPointer<ImageButton> previousarrow;
   ScopedPointer<ImageButton> nextarrow;
